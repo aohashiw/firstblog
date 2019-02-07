@@ -1,0 +1,39 @@
+{% load staticfiles %}
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>登录</title>
+    <link rel="stylesheet" href= "{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+</head>
+<body>
+<div class="container demo-1">
+    <h3 style="color: whitesmoke;text-align: center;font-size: 3em">Welcome</h3>
+    <form action="." method="POST">
+        {% csrf_token %}
+        <div class="input_outer">
+        <input name="username" class="text" type="text" placeholder="Username">
+        <span>{{ mess }}</span>
+        </div>
+        <div class="input_outer">
+        <input name="password" class="text" type="password" placeholder="Password">
+        </div>
+        <div class="input_outer">
+            {{ login_form.captcha.errors }}
+            {{ login_form.captcha.label_tag }}
+            {{ login_form.captcha }}
+        </div>
+        <div class="input_outer">
+            <input type="submit" class="btn btn-success " value="登录">
+        </div>
+    </form>
+    <br>
+    <h5>Forgot Password?</h5>
+    <h5>Click<a href="{% url 'password_reset_recover' %}">Me</a>Reset Password </h5>
+</div>
+</body>
+</html>

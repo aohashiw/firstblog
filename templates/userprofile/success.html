@@ -1,0 +1,60 @@
+{% extends "userprofile/userbase.html" %}
+{% load staticfiles %}
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>个人主页</title>
+</head>
+<body>
+{% block content %}
+<div class="container">
+    <div class="row">
+     <div class="col-md-9">
+     {% if request.user %}
+          <li><a href="{% url 'article_create' %}">发表文章</a></li>
+    <ul>我的文章</ul>
+    {% for article in list %}
+        <li><a href="{% url 'index' %}show-{{ article.id }}.html" target="_blank" title="{{ article.title }}">{{ article.title }}</a></li>
+        <a href="#" onclick="confirm_delete()">删除{{ article.id }}</a>
+
+    <script>
+    // 删除文章的函数
+    function confirm_delete() {
+        // 调用layer弹窗组件
+        layer.open({
+            // 弹窗标题
+            title: "确认删除",
+            // 正文
+            content: "确认删除这篇文章吗？",
+            // 点击确定按钮后调用的回调函数
+            yes: function(index, layero) {
+                // 指定应当前往的 url
+                location.href='{% url 'article_delete' article.id %}'
+            },
+        })
+    }
+    </script>
+    {% endfor %}
+{% endif %}
+     </div>
+     <div class="col-md-3">
+         {% if request.user is not None %}
+            <div class="card" style="width: 18rem;">
+                {%if profile.icon %}
+                    <img src="{{ profile.icon.url }}" class="col-md-4 rounded-circle">
+                    {% endif %}
+                <div class="card-body">
+                <h5 class="card-title">{{ user.username }}</h5>
+                <p class="card-text"> {{ profile.bio }}</p>
+            </div>
+         {% endif %}
+            </div>
+     </div>
+    </div>
+</div>
+{% endblock %}
+
+</body>
+</html>

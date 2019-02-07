@@ -1,0 +1,103 @@
+﻿{% extends "base.html" %}
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="x-dns-prefetch-control" content="on" />
+<meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-title" content="PythonTOP,拓普Python学院">
+{% block title %}
+    <title>{{ show.title }}</title>
+{% endblock %}
+<link rel='stylesheet' id='bootstrap-css'  href='static/css/bootstrap.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='fontawesome-css'  href='static/css/font-awesome.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='stylesheet-css'  href='static/css/style.css' type='text/css' media='all' />
+<link rel='stylesheet' id='raxus-css'  href='static/css/raxus.css' type='text/css' media='all' />
+<link rel='stylesheet' id='open-social-style-css'  href='static/css/os.css'type='text/css' media='all' />
+<meta name='robots' content='index,follow' />
+<meta name="keywords" content="互联网,产品经理,产品设计,用户体验,交互设计,网站运营,移动互联网">
+<meta name="description" content="聚焦互联网前沿资讯，网络精华内容，交流产品心得。 每天为你速递最新、最鲜、最有料的互联网科技资讯！">
+</head>
+
+<body class="home blog site-layout-2">
+    <!-- /主体 -->
+    {% block content %}
+    <div id="main-container" class="container clearfix">
+        <section class="post-left">
+            <div class="breadcrumb">您的位置： <a itemprop="breadcrumb" href="/">首页</a> » <a
+                    href="{% url 'index' %}list-{{ show.category.id }}.html">{{ show.category.name }}</a> »
+                <span class="current">正文</div>
+            <div class="post-main clearfix">
+                <h1 class="post-title">{{ show.title }}</h1>
+                <div class="post-con clearfix">
+                    <div class="article-meta">
+                        <span class="item">分类：<a href="{% url 'index' %}list-{{ show.category.id }}.html" rel="category tag">{{ show.category.name }}</a></span>
+                        <span class="item">作者：{{ show.user }}</span>
+                        <span class="item">浏览：{{ show.views }}</span>
+                        <span class="item">{{ show.created_time }}</span>
+
+                    </div>
+                    <article class="article-content">
+                          <p>{{ show.body|safe }}</p>
+                    </article>
+
+                    <div class="post-tag"><span class="fa fa-tags" aria-hidden="true"></span>标签：
+                        {% for tag in show.tags.all  %}
+                            <a href="{% url 'index' %}tag/{{ tag.name }}" rel="tag">{{ tag.name }}</a>
+                        {% endfor %}
+
+
+                    </div>
+                    <div>
+                        <div><b>上一篇：</b>
+                            {% if next_blog %}
+                                <a href="show-{{ next_blog.pk }}.html" class="article-tag"> {{ next_blog }}</a>
+                            {% else %}
+                                没有了
+                            {% endif %}
+                        </div>
+                        <div><b>下一篇：</b>
+                            {% if previous_blog %}
+                                <a href="show-{{ previous_blog.pk }}.html" class="article-tag">{{ previous_blog }}</a>
+                            {% else %}
+                                没有了
+                            {% endif %}
+                            
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /文章 -->
+
+
+            <div class="recommend  hidden-xs">
+
+                <div class="head clearfix"><span class="sp">您可能感兴趣的:</span></div>
+                <ul>
+                    {% for h in hot %}
+                        <li>
+                            <div class="pic">
+                                <a href="{% url 'index' %}show-{{ h.id }}.html" title="{{ h.title }}">
+                                    <img  src="{% url 'index' %}media/{{ h.img }}"
+                                        srcset="{% url 'index' %}media/{{ h.img }}"
+                                        alt="{{ h.title }}" class="wp-post-image" width="145"
+                                        height="100"/></a>
+                            </div>
+                            <a class="descript " href="{% url 'index' %}show-{{ h.id }}.html" rel="bookmark"
+                               title="{{ h.title }}">{{ h.title }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+
+        </section>
+        <!-- /post-left -->
+        {% include 'right.html' %}
+    </div>
+    <!-- /主体 -->
+{% endblock %}
+</body>
+</html>
