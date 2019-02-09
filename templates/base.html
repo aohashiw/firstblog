@@ -7,7 +7,6 @@
     <title></title>
     {% endblock %}
     <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="{% static "css/login.css" %}"  />
 <link rel='stylesheet' id='bootstrap-css' href='{% static "bootstrap/css/bootstrap.min.css" %}' type='text/css' media='all'/>
 <link rel='stylesheet' id='fontawesome-css' href='{% static "css/font-awesome.min.css" %}' type='text/css' media='all'/>
 <link rel='stylesheet' id='stylesheet-css' href='{% static "css/style.css" %}' type='text/css' media='all'/>
@@ -15,44 +14,57 @@
 <link rel='stylesheet' id='open_social_float_button' href='{% static "css/os.css" %}' type='text/css' media='all'/></head>
 <body>
 <!-- 头部 -->
-<header class="fix-wrap" id="fix-wrap">
- <div class="fix-main clearfix pr" id="fix-main" >
-     <a class="index-logo" href="/" ><img src="{% static "images/未标题-1.png" %}" alt="My Blog..."></a>
-    <nav class="nav fl">
-    <ul class="fix-list " id="fix-list" >
-        <li class="menu-item" id="menu-item-24086" ><a href="/">首页</a></li>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+     <a class="navbar-brand" href="/" >My Blog</a>
+
+
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+     <ul class="navbar-nav mr-auto "   >
+        <li class="nav-item"  >
+            <a class="nav-link" href="/">首页</a></li>
+
         {% for category in allcategory %}
-        <li  class="menu-item" id="menu-item-24086">
-            <a href="{% url 'index' %}list-{{ category.id }}.html">{{ category.name }}</a>
+        <li  class="nav-item">
+            <a class="nav-link" href="{% url 'index' %}list-{{ category.id }}.html">{{ category.name }}</a>
         </li>
         {% endfor %}
-        <li class="menu-item" id="menu-item-24086" ><a href="{% url 'about' %}">关于</a></li>
+
+        <li class="nav-item" >
+            <a class="nav-link" href="{% url 'about' %}">关于</a></li>
     </ul>
-    <form method="get" class="index-search  hidden-xs" action="{% url 'index' %}s/" >
-        <input class="text" name="search" type="text" placeholder="输入关键字" value="">
-        <button class="submit" type="submit"><i class="fa fa-search"></i></button>
+
+    <form method="get" class="form-inline my-2 my-lg-0" action="{% url 'index' %}s/" >
+        <input class="form-control mr-sm-2" name="search" type="text" placeholder="输入关键字" value="">
+        <button class="submit btn btn-outline-light my-2 my-sm-0 " type="submit"><i class="fa fa-search"></i></button>
     </form>
-            <ul class="navbar-nav ">
-                <!--条目-->
-                {% if request.user.is_authenticated %}
-                <li class="nav-item dropdown" >
-                    <a class="nav-link dropdown-toggle justify-content-end" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{ request.user.username}}</a>
-                     <ul>
-                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                         <li><a class="dropdown-item" href="{% url 'index' %}success/{{ request.user.id }}">我的主页</a></li>
-                          <li><a class="dropdown-item" href="{% url 'userprofile:edit' request.user.id %}">Edit</a></li>
-                         <li><a class="dropdown-item" href="{% url 'userprofile:logout' %}">Log out</a></li>
-                        </div>
-                     </ul>
-                </li>
-                {% else %}
-                <a id="login" href="{% url 'userprofile:login' %}">登录</a>|<a href="{% url 'userprofile:register' %}">注册</a>
-                {% endif %}
-            </ul>
-    </nav>
+    <ul class="navbar-nav  justify-content-end ">
+        <!--条目-->
+        {% if request.user.is_authenticated %}
+        <li class="nav-item dropdown" >
+            <a class="nav-link dropdown-toggle justify-content-end" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ request.user.username}}</a>
+             <ul>
+                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                 <li><a class="dropdown-item" href="{% url 'index' %}success/{{ request.user.id }}">我的主页</a></li>
+                  <li><a class="dropdown-item" href="{% url 'userprofile:edit' request.user.id %}">Edit</a></li>
+                 <li><a class="dropdown-item" href="{% url 'userprofile:logout' %}">Log out</a></li>
+                </div>
+             </ul>
+        </li>
+        {% else %}
+        <li class="nav-item">
+            <a class="nav-link " id="login" href="{% url 'userprofile:login' %}">登录</a>
+        </li>
+        <li class="nav-item "> | </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'userprofile:register' %}">注册</a>
+        </li>
+        {% endif %}
+    </ul>
 </div>
-</header>
+
+</nav>
 
 {% block content %}
 {% endblock %}

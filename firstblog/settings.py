@@ -34,11 +34,9 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'userprofile.apps.UserprofileConfig',
     'DjangoUeditor',
-    'bootstrap4',
     'captcha',
+    'bootstrap4',
     'password_reset',
-    'mdeditor',
-
 ]
 
 MIDDLEWARE = [
@@ -127,6 +125,15 @@ STATICFILES_DIRS = [
 #设置文件上传路径，图片，文件
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+
+#发送邮箱设置
+EMAIL_HOST = 'smtp.163.com'
+EMAIL_HOST_USER = '13102813385@163.com'
+EMAIL_HOST_PASSWORD = 'lywqq830'
+EMAIL_PORT = 25
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'ww<13102813385@163.com>'
 
 
 
