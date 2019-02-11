@@ -5,14 +5,10 @@
 <head>
     <meta charset="UTF-8">
     <title>添加文章</title>
-    {{ article_post_form.media }}
-    <script type="text/javascript" charset="utf-8">
- window.UEDITOR_HOME_URL = window.UEDITOR_HOME_URL||"/DjangoUeditor/";
-</script>
     <script src="/static/jquery/jquery-3.3.1.min.js"></script>
-    <script src="/DjangoUeditor/static/ueditor/ueditor.config.js"></script>
-    <script src="/DjangoUeditor/static/ueditor/ueditor.all.min.js"></script>
-    <link href="/DjangoUeditor/static/ueditor/themes/default/css/ueditor.css">
+    {% block forms_style %}
+
+    {% endblock %}
 </head>
 <body>
 
@@ -24,18 +20,9 @@
             <br>
             <form method="post" action=".">
                 {% csrf_token %}
-                <div class="form-group">
-                    <label for="title">文章标题</label>
-                    <input type="text" class="form-control" id="title"name="title">
-                    <div class="form-group">
-                        <label for="body">文章正文</label>
-                        {% autoescape off %}
-                        {{ article_post_form.body }}
-                        {% endautoescape %}
-                        <textarea type="text" class="form-control"id="body"name="body"rows="12"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">发布</button>
-                </div>
+                {{ article_post_form.media }}
+                {{ article_post_form.as_p }}
+                <p> <input class=" btn btn-outline-dark" type = "submit" value = "post"> </p>
             </form>
         </div>
     </div>

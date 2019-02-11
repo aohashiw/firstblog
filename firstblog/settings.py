@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'captcha',
     'bootstrap4',
     'password_reset',
+    'mdeditor',
 ]
 
 MIDDLEWARE = [
@@ -124,6 +125,9 @@ STATICFILES_DIRS = [
 #设置文件上传路径，图片，文件
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_DIRS = (
+    os.path.join(BASE_DIR,'media')
+)
 
 
 #发送邮箱设置

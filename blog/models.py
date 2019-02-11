@@ -38,7 +38,7 @@ class Tui(models.Model):
 #文章
 class Article(models.Model):
     title = models.CharField('标题',max_length=70)
-    excerpt = models.TextField('分类',max_length=200,blank=True)
+    excerpt = models.TextField('摘要',max_length=200,blank=True)
     #使用外键 表明 一对多
     category = models.ForeignKey(Category,on_delete=models.DO_NOTHING,verbose_name='分类',blank=True,null=True)
     #多对多

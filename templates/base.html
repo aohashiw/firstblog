@@ -12,6 +12,7 @@
 <link rel='stylesheet' id='stylesheet-css' href='{% static "css/style.css" %}' type='text/css' media='all'/>
 <link rel='stylesheet' id='raxus-css' href='{% static "css/raxus.css" %}' type='text/css' media='all'/>
 <link rel='stylesheet' id='open_social_float_button' href='{% static "css/os.css" %}' type='text/css' media='all'/></head>
+
 <body>
 <!-- 头部 -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -75,9 +76,23 @@
     · <a href="#" target="_blank">湘ICP备17023990号</a> 版权所有 © </div>
 </footer>
     <!-- bootstrap.js 依赖 jquery.js 和popper.js，因此在这里引入 -->
-    <script src="{% static 'jquery/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.js'%}"></script>
+    <script src="{% static 'js/view-history.js'%}"></script>
+    <script src="{% static 'js/push.js'%}"></script>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'popper/popper.js' %}"></script>
     <script src="{% static 'bootstrap/js/bootstrap.min.js'%}"></script>
+    <script src="{% static 'js/raxus-slider.min.js'%}"></script>
+    <script src="{% static 'js/loader.js'%}"></script>
+    <script src="{% static 'js/bj-lazy-load.min.js'%}"></script>
+    <script src="{% static 'js/os.js'%}"></script>
+
+
+
+
+
+
+
     <!-- 引入layer.js -->
     <script src="{% static 'layer/layer.js' %}"></script>
 </body>

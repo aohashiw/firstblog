@@ -36,6 +36,7 @@ urlpatterns = [
     path('a/',views.article_create,name='article_create'),
     path('article-delete/<int:id>',views.article_delete,name='article_delete'),
     path('password-reset/', include('password_reset.urls')),
+    path('mdeditor/',include('mdeditor.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

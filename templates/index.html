@@ -18,7 +18,7 @@
         <section class="post-left">
             <div class="row">
                 <!-- /banner图 -->
-                <div class="col-md-6">
+                <div class="col-md-6 sl">
                     <div id="featured" class="raxus-slider" data-autoplay="3000" data-keypress="false"
                          data-thumbnail="bottom">
                         <ul class="slider-relative" id="relative">
@@ -54,50 +54,30 @@
                     <h4 class="post-left-title fl">最新文章</h4>
                     <div class="fr"></div>
                 </div>
+
                 <div class="row">
-                        <div class="article-box clearfix excerpt-1">
+                {% for a in allarticle %}
+                    <div class="article-box clearfix excerpt-1">
                             <div class="col-md-4">
                                 <div class="thumbnail">
-                                    <a href="/show-8.html" title="谷歌用户体验设计准则">
-                                        <img src="static/picture/tx_3zybskx.jpg"
-                                             srcset="media/article_img/2018/10/07/tx_3zybSKX.jpg"
-                                             alt="谷歌用户体验设计准则" class="wp-post-image" width="240" height="160"/></a>
+                                    <a href="{% url 'index' %}show-{{ a.id }}.html" title="{{ a.title }}">
+                                        <img src="media/{{ a.img }}"
+                                             alt="{{ a.title }}" class="wp-post-image" width="240" height="160"/></a>
                                 </div>
                             </div>
                             <div class="col-md-8">
-                                <h2><a href="/show-8.html" target="_blank" title="谷歌用户体验设计准则">谷歌用户体验设计准则</a></h2>
-                                <p class="txtcont hidden-xs"><a href="/" target="_blank"
-                                                                title="谷歌用户体验设计准则">Google用户体验团队致力于创建有用的（useful）、快速的（fast）、简单的（simple）、有吸引力的（engaging）、创新的（ innovative）、适合大众的（universal）、有用的（profitable）、漂亮的（beautiful）、值得信赖的（trustworthy）、个性化的（personable）的应用。</a></p>
+                                <h2><a href="{% url 'index' %}show-{{ a.id }}.html" target="_blank" title="{{ a.title }}">{{ a.title }}</a></h2>
+                                <p class="txtcont hidden-xs"><a href="{% url 'index' %}show-{{ a.id }}.html" target="_blank"
+                                                                title="{{ a.title }}">{{ a.excerpt }}</a></p>
                                 <div class="meta"><span class="label label-info"><a
-                                        href="/">Python</a></span>
-                                    <time class="item"><i class="fa fa-clock-o"></i>2018年10月07日
+                                        href="/">{{ a.category.name }}</a></span>
+                                    <time class="item"><i class="fa fa-clock-o"></i>{{ a.created_time|date:"Y年m月d日" }}
                                     </time>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="article-box clearfix excerpt-1">
-                            <div class="col-md-4">
-                                <div class="thumbnail">
-                                    <a href="/show-7.html" title="网站设计-不只是门面漂亮这么简单">
-                                        <img src="static/picture/web1.jpg"
-                                             srcset="media/article_img/2018/10/07/web1.jpg"
-                                             alt="网站设计-不只是门面漂亮这么简单" class="wp-post-image" width="240" height="160"/></a>
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <h2><a href="/show-7.html" target="_blank" title="网站设计-不只是门面漂亮这么简单">网站设计-不只是门面漂亮这么简单</a></h2>
-                                <p class="txtcont hidden-xs"><a href="/" target="_blank"
-                                                                title="网站设计-不只是门面漂亮这么简单">有人将电子商务网站的视觉设计视为纯粹的美学行为，事实上它还有另外一个很重要的作用，浏览体验。如果运用的好的话，色彩、字体等设计元素能够成功地将访客引导到某一个页面，凸显产品的特征。而较差的浏览体验会分散访客的注意力，进而减少了销售。</a></p>
-                                <div class="meta"><span class="label label-info"><a
-                                        href="/">Python</a></span>
-                                    <time class="item"><i class="fa fa-clock-o"></i>2018年10月07日
-                                    </time>
-                                </div>
-                            </div>
-                        </div>
-                        </div>
-
+                    </div>
+                {% endfor %}
+                </div>
 
                 </div>
                 <!-- /文章列表 -->

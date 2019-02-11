@@ -17,9 +17,9 @@ def global_variable(request):
     return locals()
 
 def index(request):
-    banner = Banner.objects.filter(is_active=True)[0:4]
+    banner = Banner.objects.filter(is_active=True)[0:3]
     tui = Article.objects.filter(tui__id=1)[:3]
-    allarticle = Article.objects.all().order_by('views')[:10]
+    allarticle = Article.objects.all().order_by('id')[:10]
     hot = Article.objects.all().order_by('views')[:10]
     link = Link.objects.all()
     user=request.user
@@ -87,23 +87,19 @@ def about(request):
 def page_not_found(request):
     return render(request, '404.html')
 
-
+@login_required
 def success(request,id):
     list = Article.objects.filter(user__id=id)
-    user = User.objects.get(id = id)
-    profile = Profile.objects.get(user_id=id)
+    user = User.objects.get(username=request.user)
+    profile = Profile.objects.get(user_id=user.id)
     return render(request, 'userprofile/success.html', locals())
 
 def article_create(requset):
-    print(requset)
-    print(requset.session)
-    print(requset.user )
     if requset.user is not None:
         if requset.method == 'POST':
             uname=requset.user
             article_post_form = ArticlePostForm(data=requset.POST)
             if article_post_form.is_valid():
-                print('bb')
                 new_article = article_post_form.save(commit=False)
                 new_article.user=User.objects.get(username=uname)
                 new_article.save()
