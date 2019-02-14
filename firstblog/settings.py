@@ -32,11 +32,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
     'userprofile.apps.UserprofileConfig',
+    'comment.apps.CommentConfig',
     'DjangoUeditor',
     'captcha',
     'bootstrap4',
     'password_reset',
     'mdeditor',
+
 ]
 
 MIDDLEWARE = [

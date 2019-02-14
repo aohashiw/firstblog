@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from DjangoUeditor.models import UEditorField
+from django.urls import reverse
 # Create your models here.
 #文章分类
 class Category(models.Model):
@@ -61,6 +62,9 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('show',args=[self.id])
 
 
 class Banner(models.Model):

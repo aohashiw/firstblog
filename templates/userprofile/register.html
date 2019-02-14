@@ -7,13 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>注册</title>
-    <link rel="stylesheet"  href="{% static 'css/login.css' %}">
+    <link rel="stylesheet"  href="{% static 'css' %}">
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
 </head>
 <body>
 <div class="container">
 <div class="row">
-    <div class="col-12">
+    <div class="col-12 form">
         <br>
         <h3 style="color: whitesmoke;text-align: center;font-size: 3em">Welcome to join in</h3>
          <form action="." method="POST">
@@ -34,6 +34,8 @@
                 <label for="username">确认密码</label>
                 <input type="password" class="form-control" id="password2" name="password2"  placeholder="Password Confirmation" required>
             </div>
+             {{ mess }}
+             <br>
              <button type="submit" class="btn btn-primary">注册</button>
          </form>
     </div>

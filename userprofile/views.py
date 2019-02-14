@@ -33,6 +33,7 @@ def user_register(request):
     if request.method == "POST":
         print('进入post')
         register_form = UserRegisterForm(data=request.POST)
+        print(register_form.is_valid())
         if register_form.is_valid():
             print('表单合法')
             password = register_form.cleaned_data['password2']
@@ -41,7 +42,8 @@ def user_register(request):
             user.save()
             login(request,user)
             return redirect('index')
-        else:HttpResponse("输入表单有误，请重新输入")
+        else:
+            mess="输入表单有误，请重新输入"
     register_form=UserRegisterForm()
     return render(request, 'userprofile/register.html', locals())
 
@@ -86,7 +88,6 @@ def crop_image(current_icon, file, data, id):
 def profile_edit(request,id):
     user = User.objects.get(id = id)
     profile = Profile.objects.get(user_id=id)
-
     if request.method == 'POST':
         if request.user!= user:
             return HttpResponse("权限不足")
@@ -96,6 +97,8 @@ def profile_edit(request,id):
             profile.phone = profile_cd['phone']
             profile.bio = profile_cd['bio']
             if 'icon' in request.FILES:
+
+                '''
                 img = request.FILES['icon']
                 data = request.POST['icon_data']
                 if img.size/1024>700:
@@ -104,15 +107,16 @@ def profile_edit(request,id):
                 cropped_icon = crop_image(current_icon,img,data,user.id)
                 profile.icon = profile_cd['icon']
                 profile.icon = cropped_icon
-                profile.save()
-
                 data = {"result":profile.icon.url,}
                 return JsonResponse(data)
+                '''
+                profile.icon = profile_cd['icon']
+                profile.save()
         else:
             return HttpResponse("表单输入有误，请重新输入")
-    else:
-        profile_form = ProfileForm()
-        return render(request, 'userprofile/edit.html', locals())
+
+    profile_form = ProfileForm()
+    return render(request, 'userprofile/edit.html', locals())
 
 
 

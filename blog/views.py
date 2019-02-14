@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .models import Category,Banner,Tag,Tui,Link,Article
 from userprofile.models import Profile
+from comment.models import Comment
 import markdown
 # Create your views here.
 
@@ -42,15 +43,13 @@ def show(request,sid):
     show = Article.objects.get(id=sid)
     hot = Article.objects.all().order_by('?')
     previous_blog = Article.objects.filter(created_time__gt=show.created_time,category=show.category.id).first()
-    next_blog = Article.objects.filter(created_time__gt=show.created_time,category=show.category.id).last()
+    next_blog = Article.objects.filter(created_time__lt=show.created_time,category=show.category.id).last()
+    print(Article.objects.filter(created_time__gt=show.created_time,category=show.category.id))
+    print(previous_blog)
+    print(next_blog)
     show.views = show.views + 1
     show.save()
-    show.body = markdown.markdown(show.body,
-                                  extensions=[
-                                      'markdown.extensions.extra',
-                                      'markdown.extensions.codehilite',
-                                  ])
-    print(show.body)
+    comments = Comment.objects.filter(article=sid)
     return render(request,'show.html',locals())
 
 def tag(request,tag):

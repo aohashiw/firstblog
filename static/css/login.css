@@ -3,7 +3,7 @@
     width: 100%;
     background: transparent;
     overflow: hidden;
-    background-size: cover;
+    background-size: 100%;
     background-position: center center;
     z-index: 1;
 }

@@ -68,6 +68,41 @@
                     </div>
                 </div>
 
+            <hr>
+            {% if request.user.is_authenticated %}
+                <div>
+                <form action="{% url 'comment:post_comment' sid%}  " method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="body"><strong>发表评论</strong></label>
+                        <textarea type="text" class="form-control" id="body" name="body" rows="2"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn btn-outline-dark">Post</button>
+                </form>
+                </div>
+                <br>
+            {% else %}
+                <br>
+                <h5 class="row justify-content-center">
+                <a href="{% url 'userprofile:login' %}">登录</a>后发言
+                </h5>
+                <br>
+            {% endif %}
+
+            <h4>共有{{ comments.count }}条评论</h4>
+            <div>
+                {% for comment in comments %}
+                    <hr>
+                    <p>
+                    <strong style="color:pink">
+                        {{ comment.user }}
+                    </strong>:
+                    <span style="color: green"> {{ comment.created|date:"Y-m-d H:i:s" }}</span>
+                    </p>
+                    <pre style="font-family: inherit;font-size: 1em">{{ comment.body }}</pre>
+                {% endfor %}
+            </div>
+
             </div>
             <!-- /文章 -->
 

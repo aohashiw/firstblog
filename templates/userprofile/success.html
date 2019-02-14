@@ -14,18 +14,19 @@
 <div class="container marketing ">
       <!-- Three columns of text below the carousel -->
       <div class="row justify-content-center ">
-        <div class="col-lg-4 align-content-center">
+        <div class="col-lg-4">
             {% if profile.icon %}
-                <img class="img-responsive rounded-circle center-block " src="{{ profile.icon }}" alt="Generic placeholder image" width="140" height="140">
+                <img class=" rounded-circle center-block " src="{{ profile.icon.url }}" alt="icon" width="140" height="140">
             {% else %}
-                <img class="img-responsive rounded-circle center-block " src="{% static 'images/default_icon.png' %}" alt="Generic placeholder image" width="140" height="140">
+                <img class="img-responsive rounded-circle center-block " src="{% static 'images/default_icon.png' %}" alt="default icon " width="140" height="140">
             {% endif %}
             <br>
-          <h2 class="text-center">{{ user.username }}</h2>
-          <p class="text-center">{{ profile.bio }}</p>
+          <h2 class="">{{ user.username }}</h2>
+          <p class="">{{ profile.bio }}</p>
         </div><!-- /.col-lg-4 -->
       </div>
       <!-- START THE FEATURETTES -->
+    <div class="nav-pills">我的文章</div>
    {% for article in list %}
 
       <hr class="featurette-divider">
@@ -39,9 +40,9 @@
         </div>
         <div class="col-md-5">
             {% if article.img %}
-                <img class="featurette-image " src="{{ article.img }}" alt="Generic placeholder image">
+                <img class="featurette-image " src="{{ article.img.url }}" alt="Generic placeholder image"height="200" width="350">
             {% else %}
-                <img class="featurette-image " src="{% static 'images/default_article.jpg' %}" alt="Generic placeholder image" height="200" width="400">
+                <img class="featurette-image " src="{% static 'images/default_article.jpg' %}" alt="Generic placeholder image" height="200" width="350">
             {% endif %}
         </div>
       </div>
