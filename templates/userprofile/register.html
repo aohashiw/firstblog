@@ -9,36 +9,59 @@
     <title>注册</title>
     <link rel="stylesheet"  href="{% static 'css' %}">
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <style type="text/css">
+         body{
+            background: url({% static 'images/back2.jpg' %}) no-repeat;
+            background-size:100% 100%;
+            background-attachment:fixed;
+        }
+        #login_box{
+            padding: 35px;
+            border-radius: 10px;
+            background: rgba(210, 210, 210, 0.53);
+
+        }
+    </style>
 </head>
 <body>
 <div class="container">
-<div class="row">
-    <div class="col-12 form">
+    <div class="row justify-content-center" style="margin-top: 80px;">
         <br>
-        <h3 >Welcome to join in</h3>
-         <form action="." method="POST">
+        <br>
+        <h3 class="text-center">注册</h3>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-6"id="login_box">
+         <form action="." method="POST" class="form-horizontal" role="form" >
             {% csrf_token %}
-            <div class="form-group col-md-4">
-                <label for="username">用户名</label>
+            <div class="form-group col-md-9">
+                <label for="username">用户名:</label>
                 <input type="text" class="form-control" id="username" name="username"  placeholder="Username" required>
             </div>
-            <div class="form-group col-md-4">
-                <label for="username">Email</label>
+            <div class="form-group col-md-9">
+                <label for="email">Email:</label>
                 <input type="text" class="form-control" id="email" name="email"  placeholder="Email" required>
             </div>
-            <div class="form-group col-md-4">
-                <label for="username">密码</label>
+            <div class="form-group col-md-9">
+                <label for="password">密码:</label>
                 <input type="password" class="form-control" id="password" name="password"  placeholder="Password" required>
             </div>
-            <div class="form-group col-md-4">
-                <label for="username">确认密码</label>
+            <div class="form-group col-md-9">
+                <label for="password2">确认密码:</label>
                 <input type="password" class="form-control" id="password2" name="password2"  placeholder="Password Confirmation" required>
             </div>
              {{ mess }}
              <br>
-             <button type="submit" class="btn btn-primary">注册</button>
+             <div class="form-group">
+                 <div class="col-md-offset-7 col-md-5">
+                     <input type="submit" class="form-control btn-primary" value="注册"/>
+                 </div>
+             </div>
+             <p><a href="{% url 'index' %}"> 返回首页>>></a></p>
          </form>
+        </div>
     </div>
+</div>
 </div>
 </div>
 </body>

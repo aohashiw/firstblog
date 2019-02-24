@@ -5,7 +5,7 @@ from django.http import HttpResponse, JsonResponse
 from .forms import UserLoginForm,UserRegisterForm,ProfileForm
 from .models import Profile
 from django.contrib.auth.decorators import login_required
-from PIL import Image
+from captcha.models import CaptchaStore
 import os,uuid,json
 # Create your views here.
 
@@ -14,7 +14,7 @@ def user_login(request):
         uname =request.POST.get('username',None)
         upwd = request.POST.get('password',None)
         user=authenticate(username=uname,password=upwd)
-        print('进入')
+        print('进入POST')
         if user:
             print('验证成功')
             if user.is_active:
@@ -28,7 +28,7 @@ def user_login(request):
         login_form = UserLoginForm
         return render(request, 'userprofile/login.html', locals())
     else:
-        return render(request, 'userprofile/login.html')
+        return render(request, 'userprofile/login.html',locals())
 def user_register(request):
     if request.method == "POST":
         print('进入post')
@@ -50,35 +50,6 @@ def user_register(request):
 def user_logout(request):
     logout(request)
     return redirect('index')
-
-
-def crop_image(current_icon, file, data, id):
-    ext = file.name.split('.')[-1]
-    file_name = '{}.{}'.format(uuid.uuid4().hex[:10],ext)
-    cropped_icon = os.path.join(str(id),'icon',file_name)
-    file_path = os.path.join("media",str(id),'icon',file_name)
-
-    coords = json.loads(data)
-    t_x = int(coords['x'])
-    t_y = int(coords['y'])
-    t_width = t_x + int(coords['width'])
-    t_height = t_y + int(coords['height'])
-    t_rotate = coords['rotate']
-
-    img = Image.open(file)
-    crop_im = img.crop((t_x,t_y,t_width,t_height)).resize((400,400),Image.ANTIALIAS).rotate(t_rotate)
-
-    directory = os.path.dirname(file_path)
-    if os.path.exists(directory):
-        crop_im.save(file_path)
-    else:
-        os.makedirs(directory)
-        crop_im.save(file_path)
-    if not current_icon == os.path.join("avatar", "default.jpg"):
-        current_icon_path = os.path.join("media", str(id), "avatar", os.path.basename(current_icon.url))
-        os.remove(current_icon_path)
-
-    return cropped_icon
 
 
 

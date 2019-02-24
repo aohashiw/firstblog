@@ -11,14 +11,14 @@
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     <style type="text/css">
          body{
-            background: url({% static 'images/back (2).jpg' %}) no-repeat;
+            background: url({% static 'images/back2.jpg' %}) no-repeat;
             background-size:100% 100%;
             background-attachment:fixed;
         }
         #login_box{
             padding: 35px;
             border-radius: 10px;
-            background: rgba(174, 173, 179, 0.59);
+            background: rgba(210, 210, 210, 0.53);
 
         }
     </style>
@@ -26,31 +26,28 @@
 <body>
 {% block content %}
 <div class="container" id="top">
-    <div class="row" style="margin-top: 100px;">
-        <div class="col-md-offset-4 col-md-4">
-
-        </div>
+    <div class="row justify-content-center" style="margin-top: 80px;">
+            <h3  class="text-center" style="color:#070707;">登 录</h3>
     </div>
 
         <div class="row justify-content-center">
-
             <div class="col-md-6 " id ="login_box">
                 <form action="." method="POST" class="form-horizontal" role="form">
-                    <h1  class="text-center" style="color:#070707;">登 录</h1>
                     {% csrf_token %}
-                    <div class="form-horizontal">
-                    <div class="form-group justify-content-center">
-                        <div class="col-md-9">
+                    <div class="form-group col-md-9">
+                        <div class="">
+                            <label for="username">用户名：</label>
                             <input name="username" class="form-control" type="text" placeholder="Username" autofocus="autofocus">
                             <span>{{ mess }}</span>
                         </div>
                     </div>
-                    <div class="form-group ">
-                        <div class="col-md-9 ">
+                    <div class="form-group col-md-9 ">
+                        <div class="">
+                            <label for="password">密码：</label>
                             <input name="password" class="form-control required" type="password" placeholder="Password">
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group ">
                         <div class="col-md-3">
                              {{ login_form.captcha.errors }}
                             {{ login_form.captcha.label_tag }}
@@ -58,10 +55,11 @@
                         <div class="col-md-9">
                             {{ login_form.captcha }}
                         </div>
+
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-7 col-md-5">
-                            <input type="submit" class="form-control" class="btn-default" value="登录"/>
+                            <input type="submit" class="form-control btn-default" value="登录"/>
                         </div>
                     </div>
                      <div class="col-auto">
@@ -70,11 +68,10 @@
                              <label class="form-check-label" for="autoSizingCheck">Remember me </label>
                          </div>
                      </div>
-                    </div>
                 </form>
                 <br>
-                <p><a href="{% url 'password_reset_recover' %}">Reset Password</a> </p>
-                <p>返回首页>>></p>
+                <p><a href="{% url 'password_reset_recover' %}">找回密码</a> </p>
+                <p><a href="{% url 'index' %}"> 返回首页>>></a></p>
             </div>
             </div>
 

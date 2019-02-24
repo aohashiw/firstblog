@@ -31,7 +31,7 @@ urlpatterns = [
     path('about/',views.about,name='about'),
     path('ueditor/',include('DjangoUeditor.urls')),
     path('userprofile/',include('userprofile.urls',namespace='userprofile')),
-    path('^captcha/',include('captcha.urls')),
+    path(r'^captcha/',include('captcha.urls')),
     path('success/<int:id>/',views.success,name='success'),
     path('a/',views.article_create,name='article_create'),
     path('article-delete/<int:id>',views.article_delete,name='article_delete'),
