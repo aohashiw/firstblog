@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect,get_object_or_404,reverse
 from django.http import HttpResponse,HttpResponseRedirect
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 from .forms import ArticlePostForm
+from django.forms import  ModelChoiceField
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .models import Category,Banner,Tag,Tui,Link,Article
@@ -23,6 +24,8 @@ def index(request):
     allarticle = Article.objects.all().order_by('id')[:10]
     hot = Article.objects.all().order_by('views')[:10]
     link = Link.objects.all()
+    tags = Tag.objects.all()
+    remen = Article.objects.filter(tui__id=2)[:6]
     user=request.user
     return render(request,'index.html',locals())
 
@@ -79,7 +82,6 @@ def search(request):
     return render(request ,'search.html',locals())
 
 
-@login_required(login_url='/admin/login/')
 def about(request):
     return render(request,'page.html',locals())
 
@@ -93,6 +95,7 @@ def success(request,id):
     profile = Profile.objects.get(user_id=user.id)
     return render(request, 'userprofile/success.html', locals())
 
+@login_required
 def article_create(requset):
     if requset.user is not None:
         if requset.method == 'POST':
@@ -112,10 +115,38 @@ def article_create(requset):
         print('2')
     return render(requset,'add.html',locals())
 
+@login_required
+def article_update(request,id):
+    article = Article.objects.get(id = id)
+    print(article)
+    if request.method == 'POST':
+        article_post_form = ArticlePostForm(data = request.POST)
+        if article_post_form.is_valid():
+            article.title = request.POST['title']
+            article.category = Category.objects.get(id=request.POST['category'])
+            article.body = request.POST['body']
+            mytags =article_post_form.cleaned_data.get('tags')
+            for t in mytags:
+                print(t)
+                article.tags.add(t)
+            article.save()
+            return redirect(reverse('success',args=[User.objects.get(username=request.user).id]))
+        else:
+            return HttpResponse('')
+    else:
+        article_post_form = ArticlePostForm(initial={
+            'title':article.title,
+            'category':article.category,
+            'body':article.body,
+            'tags':Tag.objects.filter(article=article.id),
+        })
+        return render(request,'update.html',locals())
+
+@login_required
 def article_delete(requset,id):
     article = Article.objects.get(id=id)
     article.delete()
-    return redirect(reverse('success', args=[User.objects.get(id=id).id]))
+    return redirect(reverse('success', args=[User.objects.filter(username=requset.user).id]))
 
 
 

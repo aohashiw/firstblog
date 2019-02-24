@@ -38,6 +38,7 @@ urlpatterns = [
     path('password-reset/', include('password_reset.urls')),
     path('mdeditor/',include('mdeditor.urls')),
     path('comment/',include('comment.urls',namespace='comment')),
+    path('article-update/<int:id>',views.article_update,name='article_update'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

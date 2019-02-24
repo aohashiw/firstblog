@@ -1,0 +1,24 @@
+{% extends 'userprofile/userbase.html' %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>编辑文章</title>
+</head>
+<body>
+{% block content %}
+    <div class="container">
+    <div class="col-12">
+        <br>
+        <form method="post">
+            {% csrf_token %}
+            {{ article_post_form.media }}
+           {{ article_post_form.as_p }}
+            <p><button class="btn btn-outline-dark" type="submit">Post</button></p>
+        </form>
+    </div>
+    </div>
+{% endblock %}
+</body>
+</html>

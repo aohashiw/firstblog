@@ -141,4 +141,8 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'ww<13102813385@163.com>'
 
 
+#登录地址
+LOGIN_URL = '/userprofile/login/'
+
+
 

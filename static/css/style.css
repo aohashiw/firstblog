@@ -189,7 +189,7 @@ width: 145px; height: 170px; margin-bottom: 20px; overflow: hidden; }
 .comment .head { border-left: 4px solid #d9534f; line-height: 18px; padding: 5px 20px; margin: 10px 0px; margin-left: -2px; }
 .comment .head .sp { font-size: 16px; font-weight: bold; float: left; }
 .comment-changyan { padding: 0 20px; }
-.post-right { width: 300px; float: right; }
+.post-right { width: 270px; float: right; }
 .post-right .intro { font-size: 12px; color: #666; }
 .post-right .ori-title { color: #333; font-weight: bold; margin-bottom: 10px; display: block; }
 .post-right-item { padding: 15px 20px 20px; background-color: #FFF; box-shadow: 0 1px 4px rgba(0,0,0,.1); margin-bottom: 20px; }
