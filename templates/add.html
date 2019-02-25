@@ -18,7 +18,7 @@
             <form method="post" action=".">
                 {% csrf_token %}
                 {{ article_post_form.media }}
-                {{ article_post_form.as_p }}
+                {{ article_post_form.as_table }}
                 <p> <input class=" btn btn-outline-dark" type = "submit" value = "post"> </p>
             </form>
         </div>
